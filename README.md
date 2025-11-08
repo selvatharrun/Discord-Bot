@@ -1,79 +1,71 @@
 # Discord NSFW Content Moderation Bot
 
-A Discord bot that automatically removes media files (images, videos) from non-NSFW channels to help keep your server organized and safe.
+A focused, reliable Discord moderation bot that automatically removes image/video media posted in non-NSFW channels and notifies users. Minimal, configurable, and easy to extend.
 
-## Features
+Badges
+- Build: https://img.shields.io/badge/build-pending-lightgrey
+- License: https://img.shields.io/badge/license-MIT-green
 
-- Automatically detects and deletes media files in non-NSFW channels
-- Notifies users when their media is removed
-- Supports common image and video formats: .jpg, .jpeg, .png, .gif, .webp, .mp4, .mov
-- Simple commands for testing and help
+Why this repo
+- Keeps servers free of unintended media in non-NSFW channels.
+- Small, opinionated codebase for quick customization and reliable operation.
 
-## Setup Instructions
+Quick start
+1. Clone
+   git clone https://github.com/selvatharrun/Discord-Bot.git
+   cd Discord-Bot
+2. Install
+   npm install
+3. Configure (use environment variables or your host's secret manager)
+   DISCORD_BOT_TOKEN=your_bot_token
+4. Enable intents
+   In the Discord Developer Portal -> Bot -> Privileged Gateway Intents -> enable MESSAGE CONTENT INTENT
+5. Run
+   npm start
 
-### 1. Create Discord Bot
+Minimum requirements
+- Node.js 18+
+- A Discord application with a Bot token
 
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click "New Application" and give it a name
-3. Go to the "Bot" section in the left sidebar
-4. Click "Reset Token" to get your bot token (save this for step 2)
+Core features
+- Automatically deletes image/video attachments in non-NSFW channels
+- Notifies the author when their media is removed
+- Supports: .jpg, .jpeg, .png, .gif, .webp, .mp4, .mov
+- Simple commands: !ping, !help_nsfw
 
-### 2. Enable Required Intents
+Commands
+- !ping — Replies with Pong and latency.
+- !help_nsfw — Admin-only help for configuration and usage.
 
-**IMPORTANT:** You must enable the "Message Content Intent" for this bot to work:
-
-1. In the Discord Developer Portal, go to your application
-2. Click on "Bot" in the left sidebar
-3. Scroll down to "Privileged Gateway Intents"
-4. Enable **"MESSAGE CONTENT INTENT"** (this is required!)
-5. Click "Save Changes"
-
-### 3. Add Bot Token to Replit
-
-The bot token has already been added to your Replit Secrets as `DISCORD_BOT_TOKEN`.
-
-### 4. Invite Bot to Your Server
-
-1. In Discord Developer Portal, go to "OAuth2" > "URL Generator"
-2. Select scopes: `bot`
-3. Select bot permissions:
-   - Read Messages/View Channels
-   - Send Messages
-   - Manage Messages
-   - Read Message History
-4. Copy the generated URL and open it in your browser
-5. Select your server and authorize the bot
-
-### 5. Run the Bot
-
-Click the "Run" button in Replit. The bot will start and connect to Discord.
-
-## Commands
-
-- `!ping` - Check if the bot is responsive and see latency
-- `!help_nsfw` - Show help information (Admin only)
-
-## How It Works
-
-The bot monitors all messages in your server. When someone posts media in a non-NSFW channel, the bot will:
-1. Delete the message containing media
-2. Send a temporary notification explaining why
-3. Log the action to the console
-
-To allow media in specific channels, simply mark those channels as NSFW in Discord's channel settings.
-
-## Required Permissions
-
-The bot needs these permissions to function:
-- Read Messages/View Channels
+Permissions the bot needs
+- Read Messages / View Channels
 - Send Messages
-- Manage Messages (to delete media)
+- Manage Messages (to delete messages)
 - Read Message History
 
-## Troubleshooting
+How it works (brief)
+- The bot watches messages. If a message in a channel that is not marked NSFW contains supported media, it deletes the message, sends a short notification to the user, and logs the action.
 
-If the bot isn't working:
-1. Make sure "Message Content Intent" is enabled in Discord Developer Portal
-2. Verify the bot has "Manage Messages" permission in your server
-3. Check that the bot token is correct in Replit Secrets
-4. Look at the console logs for error messages
+Deployment
+- Docker
+  - Build: docker build -t discord-nsfw-moderator .
+  - Run: docker run -e DISCORD_BOT_TOKEN="$DISCORD_BOT_TOKEN" discord-nsfw-moderator
+- Process manager (PM2)
+  - pm2 start npm --name "discord-nsfw-moderator" -- start
+
+Security & maintenance
+- Never commit tokens or secrets. Use environment variables or secret managers.
+- Ensure MESSAGE CONTENT INTENT is enabled, otherwise the bot cannot read message content.
+- Keep dependencies updated and add tests for any non-Discord logic.
+
+Contributing
+1. Fork the repo
+2. Create a branch: git checkout -b feature/name
+3. Add tests and clear description
+4. Open a PR
+
+License
+MIT — see LICENSE
+
+Contact
+Owner: @selvatharrun — file issues or PRs for bugs, features, or security reports.
