@@ -3,6 +3,11 @@ import discord
 from discord.ext import commands
 import model_v1
 from pathlib import Path
+import yaml
+
+# Load token from YAML file
+with open("token.yaml", 'r') as file:
+    token = yaml.safe_load(file)
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -105,15 +110,15 @@ Mark channels as NSFW to allow media sharing in those channels. And the mute tho
     await ctx.send(help_text)
 
 def main():
-    import token
-    token = token.DISCORD_BOT_TOKEN
-    if not token:
+
+    tok = token["DISCORD_BOT_TOKEN"]
+    if not tok:
         print('ERROR: DISCORD_BOT_TOKEN environment variable not set!')
         print('Please add your Discord bot token to the Secrets.')
         return
     
     try:
-        bot.run(token)
+        bot.run(tok)
     except discord.LoginFailure:
         print('ERROR: Invalid Discord bot token!')
     except Exception as e:
