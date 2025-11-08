@@ -105,7 +105,8 @@ Mark channels as NSFW to allow media sharing in those channels. And the mute tho
     await ctx.send(help_text)
 
 def main():
-    token = "MTQzNjMxMzQzNzg4NTE3MzkzMg.GtZ6M_.fdlNLXcRLF_hrsvh8dvYvCE5Elb2QP1J7JKyKc"
+    import token
+    token = token.DISCORD_BOT_TOKEN
     if not token:
         print('ERROR: DISCORD_BOT_TOKEN environment variable not set!')
         print('Please add your Discord bot token to the Secrets.')
