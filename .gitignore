@@ -23,3 +23,5 @@ venv/
 ENV/
 env/
 .venv
+runs/
+models/
