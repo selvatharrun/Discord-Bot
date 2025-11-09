@@ -2,10 +2,6 @@
 
 A focused, reliable Discord moderation bot that automatically removes image/video media posted in non-NSFW channels and notifies users. Minimal, configurable, and easy to extend.
 
-Badges
-- Build: https://img.shields.io/badge/build-pending-lightgrey
-- License: https://img.shields.io/badge/license-MIT-green
-
 Why this repo
 - Keeps servers free of unintended media in non-NSFW channels.
 - Small, opinionated codebase for quick customization and reliable operation.
